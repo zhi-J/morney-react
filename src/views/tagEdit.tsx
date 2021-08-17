@@ -1,6 +1,6 @@
 import React from 'react';
 import {useTags} from '../useTags';
-import {useParams} from 'react-router-dom';
+import {useParams, useHistory} from 'react-router-dom';
 import Layout from '../components/Layout';
 import Icon from '../components/Icon';
 import {Button} from '../components/Button';
@@ -43,10 +43,14 @@ const TagEdit: React.FunctionComponent = () => {
   const {findTag, updateTag, deleteTag} = useTags();
   let {id} = useParams<Params>();
   const tag = findTag(parseInt(id));
+  const history = useHistory()
+  const onClickBack = ()=>{
+    history.goBack()
+  }
   return (
     <Layout>
       <Topbar>
-        <Icon name="left"/>
+        <Icon name="left" onClick={onClickBack}/>
         <span>编辑标签</span>
         <Icon/>
       </Topbar>
