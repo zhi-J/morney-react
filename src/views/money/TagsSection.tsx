@@ -34,35 +34,36 @@ const Wrapper = styled.section`
   }
 `;
 type Props = {
-  value: string[],
-  onChange: (value: string[])=> void
+  value: number[],
+  onChange: (value: number[]) => void
 }
-const TagsSection: React.FunctionComponent<Props> = (props)=>{
-  const {tags, setTags} = useTags()
-  const selectedTags = props.value
-  const onAddTag = ()=>{
-    const tagName = window.prompt('新的标签名为')
-    if(tagName !== null){
-      setTags([...tags, tagName])
+const TagsSection: React.FunctionComponent<Props> = (props) => {
+  const {tags, setTags} = useTags();
+  const selectedTagIds = props.value;
+  const onAddTag = () => {
+    const tagName = window.prompt('新的标签名为');
+    if (tagName !== null) {
+      setTags([...tags, {id: Math.random(), name: tagName}]);
     }
-  }
-  const onToggleTag = (tag: string)=>{
-    const index = selectedTags.indexOf(tag)
-    if(index >=0){
-      props.onChange(selectedTags.filter(t => t !== tag))
-    }else {
-      props.onChange([...selectedTags, tag])
+  };
+  const onToggleTag = (tagId: number) => {
+    const index = selectedTagIds.indexOf(tagId);
+    if (index >= 0) {
+      props.onChange(selectedTagIds.filter(t => t !== tagId));
+    } else {
+      props.onChange([...selectedTagIds, tagId]);
     }
-  }
-  return(
+  };
+  return (
     <Wrapper>
       <ol>
         {tags.map(tag =>
-          <li key={tag} onClick={()=>onToggleTag(tag)} className={selectedTags.indexOf(tag) >=0 ? 'selected' : ''}>{tag}</li>
+          <li key={tag.id} onClick={() => onToggleTag(tag.id)}
+              className={selectedTagIds.indexOf(tag.id) >= 0 ? 'selected' : ''}>{tag.name}</li>
         )}
       </ol>
       <button onClick={onAddTag}>新增标签</button>
     </Wrapper>
-  )
-}
-export {TagsSection}
+  );
+};
+export {TagsSection};
