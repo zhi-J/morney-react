@@ -39,8 +39,8 @@ const Wrapper = styled.div`
   padding: 0 16px;
   margin-top: 8px;
 `;
-const TagEdit: React.FunctionComponent = (props) => {
-  const {findTag, updateTag} = useTags();
+const TagEdit: React.FunctionComponent = () => {
+  const {findTag, updateTag, deleteTag} = useTags();
   let {id} = useParams<Params>();
   const tag = findTag(parseInt(id));
   return (
@@ -50,7 +50,7 @@ const TagEdit: React.FunctionComponent = (props) => {
         <span>编辑标签</span>
         <Icon/>
       </Topbar>
-      <Wrapper>
+      {tag ? <div><Wrapper>
         <Input>
           <span>标签名</span>
           <input type="text" placeholder="标签名" value={tag.name} onChange={(e) => {
@@ -58,9 +58,12 @@ const TagEdit: React.FunctionComponent = (props) => {
           }}/>
         </Input>
       </Wrapper>
-      <Center>
-        <Button>编辑标签</Button>
-      </Center>
+        <Center>
+          <Button onClick={() => {
+            deleteTag(tag.id);
+          }}>删除标签</Button>
+        </Center></div> : <Center>tag 不存在</Center>}
+
     </Layout>
   );
 };
