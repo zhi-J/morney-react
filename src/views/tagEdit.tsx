@@ -38,9 +38,9 @@ const Wrapper = styled.div`
   background: white;
   padding: 0 16px;
   margin-top: 8px;
-`
+`;
 const TagEdit: React.FunctionComponent = (props) => {
-  const {findTag} = useTags();
+  const {findTag, updateTag} = useTags();
   let {id} = useParams<Params>();
   const tag = findTag(parseInt(id));
   return (
@@ -53,7 +53,9 @@ const TagEdit: React.FunctionComponent = (props) => {
       <Wrapper>
         <Input>
           <span>标签名</span>
-          <input type="text" placeholder="标签名" value={tag.name}/>
+          <input type="text" placeholder="标签名" value={tag.name} onChange={(e) => {
+            updateTag(tag.id, {name: e.target.value});
+          }}/>
         </Input>
       </Wrapper>
       <Center>
