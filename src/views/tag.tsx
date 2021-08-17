@@ -4,6 +4,8 @@ import {useTags} from '../useTags';
 import Icon from '../components/Icon';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
+import {Button} from '../components/Button';
+import {Center} from '../components/Center';
 
 const TagList = styled.ol`
   font-size: 16px;
@@ -20,20 +22,8 @@ const TagList = styled.ol`
     }
   }
 `;
-const Button = styled.button`
-  font-size: 18px;
-  border: none;
-  padding: 8px 12px;
-  background: #F0C48A;
-  color: white;
-  border-radius: 4px;
-`;
-const Center = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 48px 0;
-`;
+
+
 
 function Tags() {
   const {tags, setTags} = useTags();
