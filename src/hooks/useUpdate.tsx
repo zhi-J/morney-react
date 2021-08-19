@@ -9,6 +9,6 @@ const useUpdate = (fn: ()=>void, deps: any[])=>{
     if(count.current > 1){
       fn()
     }
-  },deps) //依赖变化时执行
+  },[fn, deps]) //依赖变化时执行
 }
 export {useUpdate}
